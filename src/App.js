@@ -1,18 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import {Component} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+const Header = () => {
+    return <h2>Hello world</h2>;
+};
 
-      </header>
-    </div>
-  );
+// const Field = () => {
+//     const holder = `Enter here`;
+//     const fieldStyles = {
+//         width: `300px`
+//     };
+//     return <input style={fieldStyles}
+//                   placeholder={holder}
+//                   type="text"/>;
+// };
+
+class Field extends Component {
+    render() {
+        const holder = `Enter here`;
+        const fieldStyles = {
+            width: `800px`
+        };
+        return <input style={fieldStyles}
+                      placeholder={holder}
+                      type="text"/>;
+    }
 }
 
+function Btn() {
+    const text = `Log in`;
+    const logged = false;
+    // const res = () => {
+    //     return `Log in`
+    // }
+    // const p = <p>{res()}</p>
+    return <button>{logged ? `Enter` : text}</button>;
+}
+
+function App() {
+    return (
+        <div className="App">
+            <Header/>
+            <Field/>
+            <Btn/>
+        </div>
+    );
+}
+
+export {Header};
 export default App;
