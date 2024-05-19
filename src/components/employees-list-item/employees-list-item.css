@@ -1,6 +1,7 @@
 .list-group-item {
     padding: 15px 20px;
     border-bottom: 1px solid #3d5a80;
+    transition: .5s;
 }
 
 .list-group-item:last-child {
@@ -48,6 +49,10 @@
     transition: 0.3s all;
     transform: translateX(30px);
     opacity: 0;
+}
+
+.list-group-item span:active {
+    transform: scale(104%);
 }
 
 .btn-cookie:active {
