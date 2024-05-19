@@ -50,6 +50,14 @@
     opacity: 0;
 }
 
+.btn-cookie:active {
+    transform: scale(104%);
+}
+
+.btn-trash:active {
+    transform: scale(104%);
+}
+
 .list-group-item.like .fa-star {
     opacity: 1;
     transform: translateX(0px);
