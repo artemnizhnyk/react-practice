@@ -52,7 +52,8 @@
 }
 
 .list-group-item span:active {
-    transform: scale(104%);
+    scale: 104%;
+    translate: 2% 0 ;
 }
 
 .btn-cookie:active {
