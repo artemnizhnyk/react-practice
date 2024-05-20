@@ -14,10 +14,11 @@ const EmployeesList = ({data, onDelete, onSwitchProp}) => {
         );
     });
 
-    return (
-        <ul className="app-list list-group">
-            {employeesListItems}
-        </ul>
+    return (<>
+            <ul className="app-list list-group">
+                {employeesListItems}
+            </ul>
+        </>
     );
 };
 

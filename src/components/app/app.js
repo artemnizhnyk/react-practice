@@ -14,7 +14,8 @@ class App extends Component {
                 {id: 1, name: "Artem", salary: 800, isToPrize: true, isStared: true},
                 {id: 2, name: "Daniel", salary: 1000, isToPrize: false, isStared: false},
                 {id: 3, name: "Eugene", salary: 700, isToPrize: true, isStared: false}
-            ]
+            ],
+            searchQuery: ""
         };
     }
 
@@ -49,23 +50,39 @@ class App extends Component {
         }));
     };
 
+    searchEmployees = (employees, searchQuery) => {
+        if (searchQuery.length === 0) {
+            return employees;
+        }
+
+        return employees.filter(employee => employee.name.toLowerCase().indexOf(searchQuery) > -1);
+    };
+
+    onUpdateSearch = (searchQuery) => {
+        this.setState({searchQuery});
+    }
+
     render() {
-        return (<div className={'app'}>
-            <AppInfo data={this.state.data}/>
+        const {data, searchQuery} = this.state;
+        const visibleData = this.searchEmployees(data, searchQuery);
+        return (<>
+            <div className={'app'}>
+                <AppInfo data={data}/>
 
-            <div className={'search-panel'}>
-                <SearchPanel/>
-                <AppFilter/>
+                <div className={'search-panel'}>
+                    <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
+                    <AppFilter/>
+                </div>
+
+                <EmployeesList data={visibleData}
+                               onDelete={this.onDelete}
+                               onSwitchProp={this.onSwitchProp}
+                />
+
+                <EmployeeAddForm onAdd={this.onAdd}/>
+
             </div>
-
-            <EmployeesList data={this.state.data}
-                           onDelete={this.onDelete}
-                           onSwitchProp={this.onSwitchProp}
-                           />
-
-            <EmployeeAddForm onAdd={this.onAdd}/>
-
-        </div>);
+        </>);
     }
 }
 
