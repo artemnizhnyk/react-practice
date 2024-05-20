@@ -15,7 +15,8 @@ class App extends Component {
                 {id: 2, name: "Daniel", salary: 1000, isToPrize: false, isStared: false},
                 {id: 3, name: "Eugene", salary: 700, isToPrize: true, isStared: false}
             ],
-            searchQuery: ""
+            searchQuery: "",
+            filter: "all"
         };
     }
 
@@ -59,19 +60,38 @@ class App extends Component {
     };
 
     onUpdateSearch = (searchQuery) => {
-        this.setState({searchQuery});
+        this.setState({searchQuery: searchQuery.toLowerCase()});
+    };
+
+    filterEmployees = (employees, filter) => {
+        switch (filter) {
+            case "rise":
+                return employees.filter(emp => emp.isStared);
+            case "moreThan1000":
+                return employees.filter(emp => emp.salary > 1000);
+            default:
+                return employees;
+        }
+    };
+
+    onFilterChange = (filter) => {
+        this.setState({filter})
     }
 
     render() {
-        const {data, searchQuery} = this.state;
-        const visibleData = this.searchEmployees(data, searchQuery);
+        const {data, searchQuery, filter} = this.state;
+        const visibleData = this.filterEmployees(
+            this.searchEmployees(data, searchQuery),
+            filter
+        );
         return (<>
             <div className={'app'}>
                 <AppInfo data={data}/>
 
                 <div className={'search-panel'}>
                     <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                    <AppFilter/>
+                    <AppFilter filter={filter}
+                    onFilterChange={this.onFilterChange}/>
                 </div>
 
                 <EmployeesList data={visibleData}
